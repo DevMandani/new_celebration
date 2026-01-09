@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Birthday Message</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #ffe6f2, #ffb3d9);
+        text-align: center;
+        padding: 60px 20px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: relative;
+
+        /* ⭐ NEW: Soft glowing animation */
+        animation: bgGlow 8s ease-in-out infinite alternate;
+    }
+
+    /* Soft glow animation */
+    @keyframes bgGlow {
+        0% { filter: brightness(1); }
+        100% { filter: brightness(1.15); }
+    }
+
+    h1 {
+        font-size: 36px;
+        color: #c2185b;
+        animation: fade 2s infinite alternate, textGlow 3s ease-in-out infinite alternate;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Existing fade */
+    @keyframes fade {
+        from { opacity: 0.7; }
+        to   { opacity: 1; }
+    }
+
+    /* ⭐ NEW: Text glow */
+    @keyframes textGlow {
+        0% { text-shadow: 0 0 8px #ff99cc; }
+        100% { text-shadow: 0 0 18px #ff4da6; }
+    }
+
+    p {
+        max-width: 90%;
+        margin: auto;
+        font-size: 18px;
+        color: #880e4f;
+        line-height: 1.6;
+        margin-top: 20px;
+
+        /* ⭐ NEW: Smooth fade up */
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeUp 1.5s ease-out forwards 2.5s;
+    }
+
+    @keyframes fadeUp {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    a {
+        display: inline-block;
+        margin-top: 40px;
+        padding: 15px 30px;
+        background: #d81b60;
+        color: white;
+        font-size: 18px;
+        border-radius: 12px;
+        text-decoration: none;
+        transition: 0.3s;
+        z-index: 2;
+        position: relative;
+
+        /* ⭐ NEW: Button Glow */
+        animation: buttonPulse 2s ease-in-out infinite;
+        box-shadow: 0 0 12px #ff66b3;
+    }
+
+    /* Button pulse */
+    @keyframes buttonPulse {
+        0% { box-shadow: 0 0 12px #ff66b3; }
+        100% { box-shadow: 0 0 25px #ff99cc; }
+    }
+
+    a:hover {
+        background: #ad1457;
+        transform: scale(1.05);
+    }
+
+    /* 🎭 THEATRE CURTAINS */
+    .curtain {
+        position: fixed;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        background: repeating-linear-gradient(
+            90deg,
+            #8b0000 0px,
+            #b30000 20px,
+            #8b0000 40px
+        );
+        box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.8);
+        z-index: 10;
+    }
+
+    .left-curtain {
+        left: 0;
+        transform-origin: left;
+        animation: openLeft 2.5s ease-in-out forwards;
+    }
+
+    .right-curtain {
+        right: 0;
+        transform-origin: right;
+        animation: openRight 2.5s ease-in-out forwards;
+    }
+
+    @keyframes openLeft {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-100%); }
+    }
+
+    @keyframes openRight {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(100%); }
+    }
+
+    /* ⭐ NEW: Floating Hearts */
+    .heart {
+        position: fixed;
+        color: #ff4d88;
+        font-size: 20px;
+        animation: floatUp 5s linear forwards;
+        opacity: 0.8;
+        z-index: 1;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0) scale(1); opacity: 1; }
+        100% { transform: translateY(-120vh) scale(1.6); opacity: 0; }
+    }
+
+    /* ⭐ NEW: Soft Light Particles */
+    .light {
+        position: fixed;
+        width: 6px;
+        height: 6px;
+        background: white;
+        border-radius: 50%;
+        opacity: 0.7;
+        animation: lightFloat 6s linear infinite;
+    }
+
+    @keyframes lightFloat {
+        from { transform: translateY(100vh) scale(0.7); }
+        to   { transform: translateY(-20vh) scale(1.2); }
+    }
+</style>
+
+</head>
+<body>
+
+<!-- 🎭 Curtains -->
+<div class="curtain left-curtain"></div>
+<div class="curtain right-curtain"></div>
+
+<h1>💗 Happy Birthday sir 💗</h1>
+
+<p>
+
+Thank you for being my biggest support.
+You believed in me when I doubted myself,
+you stood beside me when things were difficult,
+and you helped me grow in ways I never imagined.
+</p>
+
+
+<p>
+
+You are the strength behind many of my steps,
+a guiding presence I will always be grateful for.
+No matter where life takes me,
+I’ll always remember your kindness,
+your belief in me,
+and how much you helped me become who I am today. 💛
+</p>
+<a href="third.html">Continue 🎊</a>
+
+<!-- 🎵 Background Music -->
+<audio id="bgMusic" preload="auto">
+  <source src="music/new.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* autoplay continues if playing before */
+window.addEventListener("load", () => {
+    const audio = document.getElementById("bgMusic");
+    if (localStorage.getItem("musicPlaying") === "yes") {
+        audio.volume = 1.0;
+        audio.play().catch(() => {});
+    }
+});
+
+/* ⭐ Floating Hearts Script */
+function createHearts() {
+    let heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.bottom = "-20px";
+    heart.style.fontSize = (16 + Math.random() * 20) + "px";
+
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+}
+setInterval(createHearts, 600);
+
+/* ⭐ Light Particles */
+function createLight() {
+    let light = document.createElement("div");
+    light.classList.add("light");
+
+    light.style.left = Math.random() * 100 + "vw";
+    light.style.top = "100vh";
+    light.style.animationDuration = (4 + Math.random() * 4) + "s";
+
+    document.body.appendChild(light);
+    setTimeout(() => light.remove(), 7000);
+}
+setInterval(createLight, 400);
+</script>
+
+</body>
+</html>

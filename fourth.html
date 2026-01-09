@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>More Memories</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+    body {
+        margin: 0;
+        padding: 30px 20px;
+        text-align: center;
+        background: #111;
+        font-family: "Poppins", sans-serif;
+        color: #fff;
+        overflow-x: hidden;
+        position: relative;
+        min-height: 100vh;
+    }
+
+    h1 {
+        font-size: 32px;
+        margin-top: 20px;
+        animation: fadeIn 2s ease-in-out;
+        text-shadow: 0 0 12px rgba(255, 100, 180, 0.9);
+    }
+
+    p {
+        max-width: 92%;
+        margin: auto;
+        line-height: 1.8;
+        font-size: 18px;
+        animation: fadeIn 2s ease-in-out;
+        color: #ffe9f5;
+    }
+
+    /* Fade In Effect */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(25px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Floating Photos */
+    .photo-gallery {
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 28px;
+        z-index: 2;
+        position: relative;
+    }
+
+    .photo-gallery img {
+        width: 250px;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 22px;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.6);
+        animation: floatPhoto 4s ease-in-out infinite;
+    }
+
+    .photo-gallery img:nth-child(2) {
+        animation-delay: 0.8s;
+    }
+
+    .photo-gallery img:nth-child(3) {
+        animation-delay: 1.5s;
+    }
+
+    @keyframes floatPhoto {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-18px); }
+        100% { transform: translateY(0px); }
+    }
+
+    /* ✨ Glitter Dust Particles */
+    .glitter {
+        position: fixed;
+        width: 6px;
+        height: 6px;
+        background: radial-gradient(circle, #fff, rgba(255,255,255,0));
+        border-radius: 50%;
+        pointer-events: none;
+        animation: glitterMove 4s linear infinite;
+        opacity: 0.8;
+        z-index: 3;
+    }
+
+    @keyframes glitterMove {
+        from { transform: translateY(0) scale(1); opacity: 1; }
+        to { transform: translateY(120vh) scale(0.3); opacity: 0; }
+    }
+
+    /* Cinematic Light Leak Effects */
+    .light-leak {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 170%;
+        height: 170%;
+        pointer-events: none;
+        background: radial-gradient(circle, rgba(255,111,181,0.4), transparent 70%),
+                    radial-gradient(circle at 30% 70%, rgba(255,176,101,0.4), transparent 70%),
+                    radial-gradient(circle at 70% 20%, rgba(255,0,98,0.35), transparent 70%);
+        filter: blur(45px);
+        animation: moveLeak 13s infinite alternate ease-in-out;
+        z-index: 1;
+    }
+
+    @keyframes moveLeak {
+        0% { transform: translate(-10%, -10%) scale(1.1); }
+        50% { transform: translate(15%, 10%) scale(1.3); }
+        100% { transform: translate(-5%, 15%) scale(1.2); }
+    }
+
+</style>
+</head>
+<body>
+
+<!-- Cinematic Light Leak -->
+<div class="light-leak"></div>
+
+<!-- Glitter Particles Generator -->
+<script>
+function createGlitter() {
+    const glitter = document.createElement("div");
+    glitter.classList.add("glitter");
+
+    glitter.style.left = Math.random() * 100 + "vw";
+    glitter.style.top = -10 + "px";
+    glitter.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+    document.body.appendChild(glitter);
+
+    setTimeout(() => glitter.remove(), 5000);
+}
+setInterval(createGlitter, 200);
+</script>
+
+<h1>💖 More Beautiful Moments 💖</h1>
+
+<p>
+No matter how old we grow, you will always be the magic in my life. Happy birthday, my precious sister. 
+</p>
+
+<!-- Floating Photo Gallery -->
+<div class="photo-gallery">
+    <img src="images/image3.jpg" alt="Memory A">
+    <img src="images/image1.jpg" alt="Memory B">
+    <img src="images/image2.jpg" alt="Memory C">
+</div>
+
+<!-- Background Music -->
+<audio id="bgMusic" preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+window.addEventListener("load", () => {
+    const audio = document.getElementById("bgMusic");
+
+    if (localStorage.getItem("musicPlaying") === "yes") {
+        audio.volume = 1.0;
+        audio.play().catch(() => {});
+    }
+});
+</script>
+
+</body>
+</html>
